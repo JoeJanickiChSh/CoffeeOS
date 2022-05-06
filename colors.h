@@ -14,4 +14,4 @@
 #define MAGENTA 0xd
 #define YELLOW 0xe
 #define WHITE 0xf
-#define BGFG(b, f) ((b << 4) + f)
+#define BGFG(b, f) ( ((b & 0b0111) << 4) + f)

@@ -15,7 +15,7 @@
 
 char terminal_color = BGFG(DARK_YELLOW, WHITE);
 char terminal_inverse = BGFG(WHITE,DARK_YELLOW);
-char window_color = BGFG(BLUE,WHITE);
+char window_color = BGFG(BLUE,WHITE) ;
 char window_inverse = BGFG(WHITE, BLUE);
 char close_color = BGFG(RED,WHITE);
 
@@ -71,6 +71,9 @@ void screen_update()
     window_at(3,3, 64 ,16, "Terminal");
     overlay();
 }
+
+#include "edit.h"
+
 
 char termscreen[56][12] = {0};
 int cursor_x = 0;
@@ -283,6 +286,7 @@ void kernel_main()
             k_scans(inp);
             fp = file_open(inp);
             fp->size = 0;
+            string_copy(fp->name, "");
         }
         else if(string_cmp(inp, "cat"))
         {
@@ -306,6 +310,29 @@ void kernel_main()
             k_scans(inp);   
             k_printf(k_eval(inp));
             k_printc('\n');
+        }
+        else if(string_cmp(inp, "rename"))
+        {
+            k_prints("File Name:");
+            k_scans(inp);   
+            fp = file_open(inp);
+            k_prints("New Name:");
+            k_scans(inp);
+            string_copy(fp->name, inp);
+        }
+        else if(string_cmp(inp, "edit"))
+        {
+            k_prints("File Name:");
+            k_scans(inp);   
+            fp = file_open(inp);
+            app_edit(fp);
+            screen_update();
+            k_update();
+            
+        }
+        else if(string_len(inp) == 0)
+        {
+
         }
         else
         {
