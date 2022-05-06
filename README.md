@@ -1,7 +1,6 @@
 # CoffeeOS
 
 A simple os
-It has this issue where the screen flashes when you actually boot it
 
 ## Recent Changes
 
